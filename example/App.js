@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   preview: {
     flex: 1,
     width: "100%",
-    resizeMode: "cover",
+    resizeMode: "contain",
   },
   permissions: {
     flex:1,

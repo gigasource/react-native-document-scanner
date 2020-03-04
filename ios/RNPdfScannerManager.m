@@ -39,7 +39,7 @@ RCT_EXPORT_VIEW_PROPERTY(contrast, float)
 
 RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)reactTag)
 {
-    [view capture];
+    [_scannerView capture];
 }
 
 - (UIView*) view {
