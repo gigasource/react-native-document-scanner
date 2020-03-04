@@ -1,8 +1,6 @@
-![Demo gif](https://raw.githubusercontent.com/Michaelvilleneuve/react-native-document-scanner/master/images/demo.gif)
+![Demo gif](https://raw.githubusercontent.com/gigasource/react-native-document-scanner/master/images/demo.gif)
 
-# `@woonivers/react-native-document-scanner`
-
-[![CircleCI Status](https://img.shields.io/circleci/project/github/Woonivers/react-native-document-scanner/master.svg)](https://circleci.com/gh/Woonivers/workflows/react-native-document-scanner/tree/master) ![Supports Android and iOS](https://img.shields.io/badge/platforms-android%20|%20ios%20-lightgrey.svg) ![MIT License](https://img.shields.io/npm/l/@react-native-community/netinfo.svg)
+# `@gigasource/react-native-document-scanner`
 
 Live document detection library. Returns either a URI of the captured image, allowing you to easily store it or use it as you wish!
 
@@ -12,20 +10,16 @@ Live document detection library. Returns either a URI of the captured image, all
 
 ## Getting started
 
-Version `>=2.0.0` is thinking to work with React Native >= 0.60
-
-> Use [version `1.6.2`](https://github.com/Woonivers/react-native-document-scanner/tree/v1.6.2) if you are using React Native 0.59
-
 Install the library using either yarn:
 
 ```sh
-yarn add @woonivers/react-native-document-scanner`
+yarn add @gigasource/react-native-document-scanner`
 ```
 
 or npm:
 
 ```sh
-npm install @woonivers/react-native-document-scanner --save
+npm install @gigasource/react-native-document-scanner --save
 ```
 
 Remember, this library uses your device's camera, **it cannot run on a simulator** and you must request **camera permission** by your own.
@@ -44,7 +38,7 @@ If you do not have it already in your project, you must link openCV in your `set
 
 ```java
 include ':openCVLibrary310'
-project(':openCVLibrary310').projectDir = new File(rootProject.projectDir,'../node_modules/@woonivers/react-native-document-scanner/android/openCVLibrary310')
+project(':openCVLibrary310').projectDir = new File(rootProject.projectDir,'../node_modules/@gigasource/react-native-document-scanner/android/openCVLibrary310')
 ```
 
 #### In android/app/src/main/AndroidManifest.xml
@@ -92,7 +86,7 @@ function YourComponent(props) {
 }
 ```
 
-Full example in [example folder](https://github.com/Woonivers/react-native-document-scanner/tree/master/example).
+Full example in [example folder](https://github.com/gigasource/react-native-document-scanner/tree/master/example).
 
 ## Properties
 
@@ -111,6 +105,7 @@ Full example in [example folder](https://github.com/Woonivers/react-native-docum
 | saveInAppDocument           |   iOS    | `false` |  `bool`   | If should save in app document in case of not using base 64         |
 | captureMultiple             |   iOS    | `false` |  `bool`   | Keeps the scanner on after a successful capture                     |
 | saveOnDevice                | Android  | `false` |  `bool`   | Save the image in the device storage (**Need storage permissions**) |
+| manualOnly                  |   Both   | `false` |  `bool`   | If disabling auto capture mode                                      | 
 
 ## Manual capture
 

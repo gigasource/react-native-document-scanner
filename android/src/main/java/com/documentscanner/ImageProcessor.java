@@ -96,20 +96,25 @@ public class ImageProcessor extends Handler {
     private void processPreviewFrame(PreviewFrame previewFrame) {
 
         Mat frame = previewFrame.getFrame();
+        boolean previewOnly = previewFrame.isPreviewOnly();
 
-        boolean focused = mMainActivity.isFocused();
-
-        if (detectPreviewDocument(frame) && focused) {
-            numOfSquares++;
-            double now = (double)(new Date()).getTime() / 1000.0;
-            if (numOfSquares == numOfRectangles && now > lastCaptureTime + durationBetweenCaptures) {
-                lastCaptureTime = now;
-                numOfSquares = 0;
-                mMainActivity.requestPicture();
-                mMainActivity.waitSpinnerVisible();
-            }
+        if (previewOnly) {
+            detectPreviewDocument(frame);
         } else {
-            numOfSquares = 0;
+            boolean focused = mMainActivity.isFocused();
+
+            if (detectPreviewDocument(frame) && focused) {
+                numOfSquares++;
+                double now = (double)(new Date()).getTime() / 1000.0;
+                if (numOfSquares == numOfRectangles && now > lastCaptureTime + durationBetweenCaptures) {
+                    lastCaptureTime = now;
+                    numOfSquares = 0;
+                    mMainActivity.requestPicture();
+                    mMainActivity.waitSpinnerVisible();
+                }
+            } else {
+                numOfSquares = 0;
+            }
         }
 
         frame.release();

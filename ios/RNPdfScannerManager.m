@@ -7,6 +7,7 @@
 #import <React/RCTLog.h>
 
 @interface RNPdfScannerManager()
+@property (strong, nonatomic) DocumentScannerView *scannerView;
 @end
 
 @implementation RNPdfScannerManager
@@ -27,6 +28,7 @@ RCT_EXPORT_VIEW_PROPERTY(useFrontCam, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(useBase64, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(saveInAppDocument, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(captureMultiple, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(manualOnly, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(detectionCountBeforeCapture, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(durationBetweenCaptures, double)
 RCT_EXPORT_VIEW_PROPERTY(detectionRefreshRateInMS, NSInteger)
@@ -37,18 +39,12 @@ RCT_EXPORT_VIEW_PROPERTY(contrast, float)
 
 RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)reactTag)
 {
-    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, DocumentScannerView *> *viewRegistry) {
-        DocumentScannerView *view = viewRegistry[reactTag];
-        if (![view isKindOfClass:[DocumentScannerView class]]) {
-            RCTLogError(@"Invalid view returned from registry, expecting DocumentScannerView, got: %@", view);
-        } else {
-            [view capture];
-        }
-    }];
+    [view capture];
 }
 
 - (UIView*) view {
-    return [DocumentScannerView new];
+    _scannerView = [[DocumentScannerView alloc] init];
+    return _scannerView;
 }
 
 @end

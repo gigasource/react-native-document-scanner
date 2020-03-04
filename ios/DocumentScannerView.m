@@ -15,23 +15,26 @@
 
 
 - (void) didDetectRectangle:(CIRectangleFeature *)rectangle withType:(IPDFRectangeType)type {
-    switch (type) {
-        case IPDFRectangeTypeGood:
-            self.stableCounter ++;
-            break;
-        default:
-            self.stableCounter = 0;
-            break;
-    }
     if (self.onRectangleDetect) {
         self.onRectangleDetect(@{@"stableCounter": @(self.stableCounter), @"lastDetectionType": @(type)});
     }
 
-    if (self.stableCounter > self.detectionCountBeforeCapture &&
-        [NSDate timeIntervalSinceReferenceDate] > self.lastCaptureTime + self.durationBetweenCaptures) {
-        self.lastCaptureTime = [NSDate timeIntervalSinceReferenceDate];
-        self.stableCounter = 0;
-        [self capture];
+    if (!self.manualOnly) {
+        switch (type) {
+            case IPDFRectangeTypeGood:
+                self.stableCounter ++;
+                break;
+            default:
+                self.stableCounter = 0;
+                break;
+        }
+
+        if (self.stableCounter > self.detectionCountBeforeCapture &&
+            [NSDate timeIntervalSinceReferenceDate] > self.lastCaptureTime + self.durationBetweenCaptures) {
+            self.lastCaptureTime = [NSDate timeIntervalSinceReferenceDate];
+            self.stableCounter = 0;
+            [self capture];
+        }
     }
 }
 

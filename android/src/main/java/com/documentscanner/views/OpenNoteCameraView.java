@@ -458,10 +458,7 @@ public class OpenNoteCameraView extends JavaCameraView implements PictureCallbac
 
             yuv.release();
 
-            if (!manualCapture) {
-                sendImageProcessorMessage("previewFrame", new PreviewFrame(mat, true, false));
-            }
-
+            sendImageProcessorMessage("previewFrame", new PreviewFrame(mat, manualCapture));
         }
 
     }
