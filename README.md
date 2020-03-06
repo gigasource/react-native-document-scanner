@@ -26,8 +26,21 @@ Remember, this library uses your device's camera, **it cannot run on a simulator
 
 ### iOS Only
 
-CocoaPods on iOS needs this extra step:
+CocoaPods on iOS needs this extra steps:
 
+Add camera permission  
+In Info.plist
+```
+<key>NSCameraUsageDescription</key>
+<string>Be able to scan document</string>
+```
+In Podfile
+```
+permissions_path = '../node_modules/react-native-permissions/ios'
+pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
+```
+
+Then install
 ```sh
 cd ios && pod install && cd ..
 ```
